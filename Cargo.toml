@@ -20,6 +20,8 @@ console_log = "0.2.0"
 wasm-bindgen-test = "0.3.24"
 math = {verision = "0.4", path = "src/utils/winterfell-math", package="winter-math",default-features = false}
 crypto = {verision = "0.4", path = "src/utils/winterfell-crypto", package="winter-crypto",default-features = false}
+utils-core = {version = "0.4", path = "src/utils/winterfell-utils/utils/core", package = "winter-utils", default-features = false}
+
 [dev-dependencies]
 criterion = "0.3.3"
 num-bigint = "0.3.0"
@@ -27,8 +29,8 @@ num-bigint = "0.3.0"
 [features]
 default = ["std"]
 std = [
-	"sp-std/std",
-	# "codec/std",
+    "sp-std/std",
+    # "codec/std",
 
     # "rand/std",
 ]
@@ -40,3 +42,4 @@ wasm-opt = false
 
 [profile.release]
 debug = true
+

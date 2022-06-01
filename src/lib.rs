@@ -96,6 +96,59 @@ pub fn rescue_two_para_u8_32(para_1: [u64; 4], para_2: [u64; 4]) -> [u8; 32] {
     return result.as_bytes();
 }
 
+// convert a [u64;4] hash result to [u8;32]
+#[wasm_bindgen]
+pub fn to_u8array(values: String) -> Vec<u8> {
+    let mut values_in_u64 = vec![];
+    if values.len() != 0 {
+        let values_a: Vec<&str> = values.split(',').collect();
+        values_in_u64 = values_a
+            .iter()
+            // .map(|public_a| public_a.parse::<u64>().unwrap())
+            .map(|public_a| public_a.parse::<u64>().expect("parse fail"))
+            .collect();
+    };
+    assert!(
+        (values_in_u64.len() == 4),
+        "expected len of values_in_u64 to be exactly 4 but received {}",
+        values_in_u64.len()
+    );
+    assert!(
+        values_in_u64.len() == 4,
+        "The input is not a U256, please check your input!"
+    );
+    let elements = from_vec(values_in_u64);
+    return ElementDigest::new(elements.try_into().unwrap())
+        .as_bytes()
+        .to_vec();
+}
+
+// convert a [u8;32]
+#[wasm_bindgen]
+pub fn to_u64array(values: String) -> Vec<u64> {
+    use utils_core::{Deserializable, SliceReader};
+
+    let mut values_in_u8 = vec![];
+    if values.len() != 0 {
+        let values_a: Vec<&str> = values.split(',').collect();
+        values_in_u8 = values_a
+            .iter()
+            // .map(|public_a| public_a.parse::<u64>().unwrap())
+            .map(|public_a| public_a.parse::<u8>().expect("parse fail"))
+            .collect();
+    };
+    assert!(
+        (values_in_u8.len() == 32),
+        "expected len of values_in_u8 to be exactly 32 but received {}",
+        values_in_u8.len()
+    );
+
+    let mut reader = SliceReader::new(&values_in_u8);
+    let convert_result = ElementDigest::read_from(&mut reader).unwrap();
+
+    return as_u64(convert_result).to_vec();
+}
+
 /// HELPER
 pub fn from_vec(origin: Vec<u64>) -> Vec<BaseElement> {
     let mut res: Vec<BaseElement> = Vec::new();
