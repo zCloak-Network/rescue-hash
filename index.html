@@ -7,99 +7,14 @@
   <body>
     <script type="module">
       import init, {rescue,init_panic_hook} from "./pkg/rescue.js";
-      // import init from "./pkg/starks_proofgen.js";
 
       init().then(async m => {
         init_panic_hook()
         let t1 = new Date() 
-        // for (var i=0; i<12000; i++)
-        // {
-        // //         let loop = rescue("1,2,3,4")
-        // //     }
-        // let g = rescue("2,1704586040892553644,7667725956169696099,15322547880270344141,12730300956469525794,14724532961550870207,11926599669562559788,7176910545438469284")
-        // }
         let g = rescue("136,34,122,99,108,111,97,107,34,1,0,0,1,1,1,1,2,2,2,2")
         let t2 = new Date() 
         console.log(`The hashing time is :${t2.getTime() - t1.getTime()}`,'ms')
         console.log(g)
-
-                // init_panic_hook()
-                // merkle hash
-                // let b = output_inputs_string("212536982540424896447084657753041636028,62602682562930640774650326019494833305","222681710225944171422886330904366434491,0,68557181380680206116221109328877907882,0,68877343039486781374307978289172110465","269290709893687070873337820426365295693,0,189343189959438333548680818555536049573,1,154997781429020006743060100894063327107")
-                // let b = output_inputs_string("111,222","3586102231,11924,20099,40330,126239986506010,194515439315491754531356361705017581862,317097701751359110396564737023410149248","163584248573758124247011040768267472759,105235917359425270697537732270854933106")
-                // ⬇️ 这个是 kilt credential root 的
-                // let b = output_inputs_string("","528,311189074552473837668001800292715180257,3523442678,62261,17889,40711,89840307482416,194515439315491754531356361705017581862,90457658405290268147553990996635285742,3235206455,62970,16532,44561,248201482414258,86051990247904266822470237154656440317,73889347862713477327097171224120624546,4200196319,30821,19838,41690,68805128022084,157211099613496641049417004975777857147,311961394196786290997651265402075124671,4253134113,31669,17575,48067,195614649076802,269781719789252286161230702533582314474,137481426361217494534035299220960260701,937678082,53146,17674,39047,139052216724011,264788727686776515939085115610647389018,309299447081900217115392982914725835472","252480570972049094977879398123229768023,163584248573758124247011040768267472759,64401974746417508784439638502889322168,87820060121980488142139625585756264121,165873169578009892867235070762832001381,255623340657534185263079474765697212144,172659092149451661923027031467059363089,257432013315472657421285583973973724834,221612621359750883861760366537409126742,274290926469745048760174327996121017941,280180491899205648968436524606020749934")
-                // let b = output_inputs_string("1","333,111,222,444","");index.
-                // ⬇️ 这是三个节点的！           
-                
-                //⬇️ 这是kilt 拆分真实数据 要拼接的！
-                // let b = output_inputs_string("1","90457658405290268147553990996635285742,3235206455,62970,16532,44561,248201482414258,22,294843316026996357320061269476730252737,616765,311961394196786290997651265402075124671,137481426361217494534035299220960260701,309299447081900217115392982914725835472","64401974746417508784439638502889322168,127557015350448219066915144450596417715,172659092149451661923027031467059363089,221612621359750883861760366537409126742,280180491899205648968436524606020749934")
-                // let f = generate_program("begin dup.1 dup.1 pad.1 lt.128 while.true read.ab roll.4 roll.4 push.1 sub dup.1 pad.1 lt.128 end drop.1 repeat.5 read.a end read.a dup.1 push.20 gt.128 if.true pad.3 else read.ab read.a kvalid roll.4 drop.1 push.4 swap.1 sub dup.1 dup.1 pad.1 lt.128 while.true read.ab roll.4 roll.4 push.1 sub dup.1 pad.1 lt.128 end drop.2 khash push.1 end end") 
-
-                
-                // 4.15 credential
-                // let b = output_inputs_string("6383461,427020088179,8271117968073418672650679055481,30765223346328968342731846777,9459527121954502519414720132217","9","8");
-
-                // let b = output_inputs_string("191316898741855275043382750345139265285,296803305817646664683329347328201596143","222681710225944171422886330904366434491,0,68877343039486781374307978289172110465","269290709893687070873337820426365295693,1,154997781429020006743060100894063327107")
-        // let b = output_inputs_string("6383461,427020088179,8271117968073418672650679055481,30765223346328968342731846777,9459527121954502519414720132217", "822100479,65180,18733,39666,58970707830637,17,265823686347171802716036701805494001648,512601956,39730,19599,38359,279259408898713,3,265823686347171802716036701805494001648,1978135666,6256,18017,34947,46882960702598,80,265823686347171802716036701805494001648,4279143373,51797,18300,39764,271081750395466,3,265823686347171802716036701805494001648,3463681726,47213,20469,36651,79196196394411,5,265823686347171802716036701805494001648,154695717715250938030254067196005640775,184148822146795982314571085392178381778", "228928542682634861850209985712415330230,228928542682634861850209985712415330230,228928542682634861850209985712415330230,228928542682634861850209985712415330230,228928542682634861850209985712415330230,292910433672491015101354363462310691367,336838800946970184096930423364011400687")
-        // let b = output_inputs_string("6383461,427020088179,8271117968073418672650679055481,30765223346328968342731846777,9459527121954502519414720132217", "822100479,65180,18733,39666,58970707830637,17,265823686347171802716036701805494001648,512601956,39730,19599,38359,279259408898713,3,265823686347171802716036701805494001648,1978135666,6256,18017,34947,46882960702598,80,265823686347171802716036701805494001648,4279143373,51797,18300,39764,271081750395466,3,265823686347171802716036701805494001648,3463681726,47213,20469,36651,79196196394411,5,265823686347171802716036701805494001648,154695717715250938030254067196005640775,184148822146795982314571085392178381778", "228928542682634861850209985712415330230,228928542682634861850209985712415330230,228928542682634861850209985712415330230,228928542682634861850209985712415330230,228928542682634861850209985712415330230,292910433672491015101354363462310691367,336838800946970184096930423364011400687")
-                // let b = output_inputs_string("","","")
-                // let b = output_inputs_string("6383461","4039355847,16191,18936,33459,127397363001175,40,76264564711456200626912835053278337560,212733427488662582425543743370471349069,49483690381733756640288170018821018450,257943256562916649258423794045419201528,291876882682546277004468494675085204472","169055813545144094809884768883895701729,28600544461689619968499882997053839584,45073140351593994515899201047809657566,108322546143379695937089472497349237978,316262710236705736543828638940797333903")                // console.log("11")
-                // let c = output_option_string()
-                // let d = generate_program("begin read lt.128 if.true pad.1 else push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.2 ne if.true  swap dup push.1 else pad.3 end else push.1 pad end end end end")
-                // let g = generate_program_hash("begin read lt.128 if.true pad.1 else push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.2 ne if.true  swap dup push.1 else pad.3 end else push.1 pad end end end end")
-
-
-                // let d = generate_program("begin push.0 push.1 push.2 push.4 push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.5 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-                // let d = generate_program("begin push.156 push.496 push.408 push.410 push.392 push.608 push.704 push.418 push.116 push.104 push.764 push.458 push.96 push.702 push.360 push.626 push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.17 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-                // let g = generate_program_hash("begin push.156 push.496 push.408 push.410 push.392 push.608 push.704 push.418 push.116 push.104 push.764 push.458 push.96 push.702 push.360 push.626 push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.17 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-
-                // let d = generate_program_alone("begin add push.5 mul push.7 end")
-                // let f = generate_program("begin push.25 read lt.128 if.true	pad.1 else push.0 push.1 push.2 push.4 push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.5 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end end")
-
-                // console.log("11122")
-                // let d = generate_program("begin pad.1 repeat.3 read.ab dup.2 lt.128 if.true pad.1 add else swap.1 end sub dup.1 mul add end end")
-                // let d = generate_program("begin pad.1 repeat.8 read.ab dup.2 lt.128 if.true pad.1 add else swap.1 end sub dup.1 mul add end end")
-
-
-                // let d = generate_program("begin push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.2 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-                // let g = generate_program_hash("begin push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.2 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-
-
-                // let d = generate_program("begin push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.3 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-                // let g = generate_program_hash("begin push.1 read dup push.1 while.true roll.4 ne if.true swap push.1 add dup push.3 ne if.true swap dup push.1 else pad.3 end else push.1 pad end end end")
-
-                // let f = generate_program("begin repeat.5 read.a end read.a dup.1 push.20 gt.128 if.true pad.5 else read.ab kvalid  repeat.4 read.ab end push.5 khash pad.1 push.1 swap.2 roll.4 drop.1 end end")
-                // let g = generate_program_hash("begin repeat.5 read.a end read.a dup.1 push.20 gt.128 if.true pad.5 else read.ab kvalid  repeat.4 read.ab end push.5 khash pad.1 push.1 swap.2 roll.4 drop.1 end end")
-
-                // let f = generate_program("begin repeat.5 read.a end read.a dup.1 push.17 lt.128 repeat.7 roll.8 end read.ab kvalid pick.2 roll.4 swap.2 swap.4 roll.8 drop.1 repeat.5 read.a end read.a dup.1 dup.1 push.1 push.2 roll.4 eq pad.1 swap.2 eq swap.1 drop.1 or if.true push.0 else push.1 end repeat.7 roll.8 end read.ab kvalid repeat.5 roll.8 end repeat.6 read.a end dup.1 repeat.7 roll.8 end read.ab kvalid pad.3 repeat.3 roll.8 end repeat.3 roll.4 drop.1 end swap.1 repeat.6 read.a end dup.1 repeat.7 roll.8 end read.ab kvalid swap.2 pad.3 roll.8 repeat.3 swap.1 drop.1 end repeat.6 read.a end dup.1 repeat.7 roll.8 end read.ab kvalid pad.3 repeat.3 roll.8 end repeat.3 roll.4 drop.1 end read.ab read.ab pad.1 repeat.3 roll.8 end roll.4 drop.1 push.5 push.7 khash pad.3 repeat.3 roll.8 end repeat.3 roll.4 drop.1 end add add push.18 lt.128 pad.3 roll.4 roll.8 roll.8 swap.1 push.1 mul swap.1 push.2 mul add swap.1 push.4 mul add roll.4 drop.1 swap.1 drop.1 swap.2 end")
-                // let g = generate_program_hash("begin repeat.5 read.a end read.a dup.1 push.17 lt.128 repeat.7 roll.8 end read.ab kvalid pick.2 roll.4 swap.2 swap.4 roll.8 drop.1 repeat.5 read.a end read.a dup.1 dup.1 push.1 push.2 roll.4 eq pad.1 swap.2 eq swap.1 drop.1 or if.true push.0 else push.1 end repeat.7 roll.8 end read.ab kvalid repeat.5 roll.8 end repeat.6 read.a end dup.1 repeat.7 roll.8 end read.ab kvalid pad.3 repeat.3 roll.8 end repeat.3 roll.4 drop.1 end swap.1 repeat.6 read.a end dup.1 repeat.7 roll.8 end read.ab kvalid swap.2 pad.3 roll.8 repeat.3 swap.1 drop.1 end repeat.6 read.a end dup.1 repeat.7 roll.8 end read.ab kvalid pad.3 repeat.3 roll.8 end repeat.3 roll.4 drop.1 end read.ab read.ab pad.1 repeat.3 roll.8 end roll.4 drop.1 push.5 push.7 khash pad.3 repeat.3 roll.8 end repeat.3 roll.4 drop.1 end add add push.18 lt.128 pad.3 roll.4 roll.8 roll.8 swap.1 push.1 mul swap.1 push.2 mul add swap.1 push.4 mul add roll.4 drop.1 swap.1 drop.1 swap.2 end")
-
-                // let f = generate_program("begin read.a push.18 lt.128 end")
-                // let g = generate_program_hash("begin read.a push.18 lt.128 end")
-
-                // let f = generate_program("begin push.1 push.2 div end")
-
-                // let f = generate_program("begin read.ab rmerkle.3 swap.2 drop.2 swap.1 roll.4 eq  if.true eq end end")
-
-                // let g = generate_program_hash("begin read.ab rmerkle.3 swap.2 drop.2 swap.1 roll.4 eq  if.true eq end end")
-
-                // let f = generate_program("begin repeat.5 read.a end read.ab blake2b swap.2 drop.2 swap.2 drop.2 swap.2 drop.1 swap.1 roll.4 eq if.true eq else pad.1 end end")
-                // 下 kilt credential！
-                // let f = generate_program("begin push.1 repeat.5 if.true repeat.5 read.a end read.ab blake2b read.ab pick.2 pick.2 roll.4 eq if.true eq else pad.1 end else pad.1 end end if.true khash swap.1 roll.4 eq if.true eq else pad.1 end else pad.1 end end")
-                // let g = generate_program_hash("begin push.1 repeat.5 if.true repeat.5 read.a end read.ab blake2b read.ab pick.2 pick.2 roll.4 eq if.true eq else pad.1 end else pad.1 end end if.true khash swap.1 roll.4 eq if.true eq else pad.1 end else pad.1 end end")
-                // push.20 read.a lt.128 if.true	pad.1 else	
-                // let f = generate_program("begin push.528 read.a ne if.true	pad.3 else read.ab push.1 repeat.5 if.true repeat.5 read.a end read.ab blake2b read.ab pick.2 pick.2 roll.4 eq if.true eq else pad.2 end else pad.1 end end if.true khash swap.1 roll.4 pick.1 eq if.true dup.1 swap.2 pick.1 eq else pad.2 push.1 end else pad.2 push.1 end end end")
-                // let g = generate_program_hash("begin push.528 read.a ne if.true	pad.3 else read.ab push.1 repeat.5 if.true repeat.5 read.a end read.ab blake2b read.ab pick.2 pick.2 roll.4 eq if.true eq else pad.2 end else pad.1 end end if.true khash swap.1 roll.4 pick.1 eq if.true dup.1 swap.2 pick.1 eq else pad.2 push.1 end else pad.2 push.1 end end end")
-                
-              // 换叶子节点顺序 （with public input）
-              //  let f = generate_program("begin read.a read.a push.0 roll.4 swap.1 drop.1 dup.1 push.3 swap.1 sub swap.1 push.1 while.true dup.1 push.0 lt.128 if.true read.ab pad.2 swap.2 swap.4 roll.8 roll.8 drop.2 push.1 sub push.1 else noop end end dup.1 pad.1 lt.128 while.true read.ab pad.1 roll.4 swap.1 drop.1 push.1 sub dup.1 pad.1 lt.128 end drop.1 end ")
-                // let f = generate_program("begin repeat.5 read.a end read.a dup.1 push.20 gt.128 if.true pad.3 else read.ab read.a kvalid push.0 roll.4 swap.1 drop.1 dup.1 push.4 swap.1 sub swap.1 push.1 while.true dup.1 push.0 lt.128 if.true read.ab pad.2 swap.2 swap.4 roll.8 roll.8 drop.2 push.1 sub push.1 else noop end end dup.1 pad.1 lt.128 while.true read.ab pad.1 roll.4 swap.1 drop.1 push.1 sub dup.1 pad.1 lt.128 end drop.1 khash push.1 end end")
-                //eq if.true eq else pad.1 end
-                //read.ab pick.2 pick.2 swap.1 roll.4 eq if.true eq else pad.1 end 
-                // let f = generate_program("begin read.a lt.128 if.true pad.1 else read.a eq end end ")
-                // console.log(starks_proofgen(f,b,1,c))
-                // console.log(g)
               }).catch(console.error);
       </script>
   </body>
