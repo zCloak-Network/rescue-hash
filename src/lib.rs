@@ -1,11 +1,12 @@
 #![no_std]
+use crypto::hash::rescue;
 use crypto::{hash::rescue::rp64_256::ElementDigest, Digest, ElementHasher};
 // use log::debug;
 use sp_std::{vec, vec::Vec};
 // use serde::{Serialize, Deserialize};
 #[macro_use]
 extern crate alloc;
-use alloc::string::String;
+use alloc::string::{String, ToString};
 // RE-EXPORTS
 // ================================================================================================
 
@@ -24,8 +25,11 @@ use hex;
 // RESCUE
 // ================================================================================================
 
-///  Executes the `rescue` fucntion and returns the rescue hash result.
-///
+/// Executes the `rescue` fucntion and returns the rescue hash result.
+/// IF the input is [A,B,C,D] -- [a_0,a_1,a_2,a_3, b_0,b_1,b_2,b_3, c_0,c_1,c_2,c_3, d_0,d_1,d_2,d_3]
+/// The input in the VM should be : [d_3,d_2,d_1,d_0, c_3,c_2,c_1,c_0, b_3,b_2,b_1,b_0, a_3,a_2,a_1,a_0,], in the VM the rescue sequense should be :
+/// Hash(A,B,(C,D))
+/// 
 /// * `inputs` specifies the rescue input, it should contain 8 elements or more(over 8 but should be some multiple of 4);
 /// *  Return the hash result Vec<u64>
 #[wasm_bindgen]
@@ -54,13 +58,15 @@ pub fn rescue(values: String) -> Vec<u64> {
     if hash_times == 1 {
         result = crypto::hashers::Rp64_256::hash_elements(&elements);
     } else {
-        let mut first: Vec<BaseElement> = elements.drain(0..8).collect();
+        let mut first: Vec<BaseElement> = elements.drain(elements.len() - 8..).collect();
+        console_log!("first is :{:?}",first);
         let mut to_be_hash = crypto::hashers::Rp64_256::hash_elements(&first);
         for i in 1..hash_times {
             let mut a = ElementDigest::digests_as_elements(&[to_be_hash]).to_vec();
-            let mut drain_4_element: Vec<BaseElement> = elements.drain(0..4).collect();
-            a.append(&mut drain_4_element);
-            to_be_hash = crypto::hashers::Rp64_256::hash_elements(&a);
+            let mut drain_4_element: Vec<BaseElement> = elements.drain(elements.len() - 4..).collect();
+            drain_4_element.append(&mut a);
+            console_log!("to be hashed is {:?}",drain_4_element);
+            to_be_hash = crypto::hashers::Rp64_256::hash_elements(&drain_4_element);
         }
         result = to_be_hash;
     };
@@ -172,14 +178,29 @@ pub const MAX_LOOP_DEPTH: usize = 8;
 
 #[test]
 fn hash_elements() {
+    // use libc_print;
     // let elements: [BaseElement; 8] = rand_array();
-    let elements = String::from("1,2,3,4,5,6,7,8,1,2,3,4");
-    let result = rescue(elements);
-    let expect = [
-        13731018041795440645,
-        13695776054319495440,
-        4543330650498719355,
-        16248638019424921580,
-    ];
-    assert!(result == expect, "The hash result is wrong!");
+    let salted1 = String::from("fa160588c39c81a728a67f99d40b14fa341b5fabb87471528833897fe6a7a965");
+    let salted2 = String::from("6ac31d152c204315e18e5adfeb66e69fdd395a8f382a8e8db3d589135ac2ade7");
+    let salted1_encode = hex::decode(salted1).unwrap();
+    //250,22,5,136,195,156,129,167,40,166,127,153,212,11,20,250,52,27,95,171,184,116,113,82,136,51,137,127,230,167,169,101
+    
+    let salted2_encode = hex::decode(salted2).unwrap();
+    //106,195,29,21,44,32,67,21,225,142,90,223,235,102,230,159,221,57,90,143,56,42,142,141,179,213,137,19,90,194,173,231
+    // libc_print::libc_println!("salted1_encode is {:?}",salted1_encode);
+    // libc_print::libc_println!("salted2_encode is {:?}",salted2_encode);
+
+    let para_1 = to_u64array("250,22,5,136,195,156,129,167,40,166,127,153,212,11,20,250,52,27,95,171,184,116,113,82,136,51,137,127,230,167,169,101".to_string());
+    let para_2 = to_u64array("106,195,29,21,44,32,67,21,225,142,90,223,235,102,230,159,221,57,90,143,56,42,142,141,179,213,137,19,90,194,173,231".to_string());
+    
+    // libc_print::libc_println!("1 is {:?}",para_1);//12070100839944230650,18020041016752449064,5940657719976336180,7325570877318837128
+    // libc_print::libc_println!("2 is {:?}",para_2);//1532103671941022570,11522009859924594401,10200136628452342237,16694213085862942131
+
+    let elements = String::from("11552303281443191110,9931840600877352623,2109569013263734308,5271959068384342092,12988393255616004850,10794669482586504578,17960664921315273404,17632219554368387239");
+
+    let result = rescue(elements);// 14541782993006284926,8635774954518030733,15730819215817492770,2795686671592326589
+    // libc_print::libc_println!("result is {:?}",result);
+    let result_u8 = to_u8array("14541782993006284926,8635774954518030733,15730819215817492770,2795686671592326589".to_string());
+    // libc_print::libc_println!("result hash is {:?}",hex::encode(result_u8));
+
 }
