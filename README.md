@@ -7,7 +7,7 @@ This is a wasm version of rescue-hash.
    
 
 ## 2. Input and Outputs
-The `inputs` specifies the rescue input, it should contain 8 elements or more(over 8 but should be some multiple of 4);
+The `inputs` specifies the rescue input
 
 The `outputs` is the rescue result, which contains 4 elements as `Vec<u64>`.
 
