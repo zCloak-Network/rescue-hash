@@ -2,7 +2,7 @@
 use crypto::{hash::rescue::rp64_256::ElementDigest, ElementHasher};
 use sp_std::{vec::Vec};
 extern crate alloc;
-
+pub use rescue_prime_optimized::RescuePrimeOptimized;
 use math::fields::f64::BaseElement;
 use math::StarkField;
 
@@ -17,6 +17,7 @@ use math::StarkField;
 ///
 /// * `inputs` specifies the rescue input, the inputs should be a u64 array , like:[12331231203,123949053121,39018241409....]
 /// *  Return the hash result Vec<u64>
+
 pub fn u64a_rescue(values: Vec<u64>) -> Vec<u64> {
     let mut values_in_u64 = values;
     if values_in_u64.len() < 8 {
@@ -63,6 +64,11 @@ pub fn u64a_rescue(values: Vec<u64>) -> Vec<u64> {
 
     return as_u64(result).to_vec();
 }
+
+pub fn rescue_prime_optimized(values: Vec<u64>) -> Vec<u64> {
+    return RescuePrimeOptimized(values);
+}
+
 
 /// HELPER
 fn as_u64(origin: ElementDigest) -> [u64; 4] {

@@ -25,6 +25,7 @@ dependencies = [
  "cc",
  "cfg-if",
  "constant_time_eq",
+ "digest",
 ]
 
 [[package]]
@@ -55,6 +56,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "console_error_panic_hook"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a06aeb73f470f66dcdbf7223caeebb85984942f22f1adb2a088cf9668146bbbc"
+dependencies = [
+ "cfg-if",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "constant_time_eq"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -78,6 +89,7 @@ checksum = "f2fb860ca6fafa5552fb6d0e816a69c8e49f0908bf524e30a90d97c85892d506"
 dependencies = [
  "block-buffer",
  "crypto-common",
+ "subtle",
 ]
 
 [[package]]
@@ -95,6 +107,15 @@ name = "itoa"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "112c678d4050afce233f4f2852bb2eb519230b3cf12f33585275537d7e41578d"
+
+[[package]]
+name = "js-sys"
+version = "0.3.60"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "49409df3e3bf0856b916e2ceaca09ee28e6871cf7d9ce97a692cacfdb2a25a47"
+dependencies = [
+ "wasm-bindgen",
+]
 
 [[package]]
 name = "keccak"
@@ -139,11 +160,27 @@ dependencies = [
 name = "rescue"
 version = "0.1.0"
 dependencies = [
- "sp-std",
+ "rescue-prime-optimized",
+ "sp-std 4.0.0-dev",
  "wasm-bindgen",
- "winter-crypto",
- "winter-math",
- "winter-utils",
+ "winter-crypto 0.4.0",
+ "winter-math 0.4.0",
+ "winter-utils 0.4.0",
+]
+
+[[package]]
+name = "rescue-prime-optimized"
+version = "0.4.0"
+source = "git+https://github.com/jonathanxuu/RescuePrimeOptimiezd.git#93e320fa1a9448812a1f0de57cef3930eacb4cbc"
+dependencies = [
+ "blake3",
+ "console_error_panic_hook",
+ "sp-std 5.0.0",
+ "wasm-bindgen",
+ "wasm-bindgen-test",
+ "winter-crypto 0.6.2",
+ "winter-math 0.6.2",
+ "winter-utils 0.6.2",
 ]
 
 [[package]]
@@ -151,6 +188,12 @@ name = "ryu"
 version = "1.0.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f3f6f92acf49d1b98f7a81226834412ada05458b7364277387724a237f062695"
+
+[[package]]
+name = "scoped-tls"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e1cf6437eb19a8f4a6cc0f7dca544973b0b78843adbfeb3683d1a94a0024a294"
 
 [[package]]
 name = "serde"
@@ -197,6 +240,17 @@ dependencies = [
 name = "sp-std"
 version = "4.0.0-dev"
 source = "git+https://github.com/zCloak-Network/substrate#6699fccb942eb61734dfdbc9b970dd8784d455ab"
+
+[[package]]
+name = "sp-std"
+version = "5.0.0"
+source = "git+https://github.com/paritytech/substrate.git#16b2e644487f7f767eeefd4debf11a7948bfa4db"
+
+[[package]]
+name = "subtle"
+version = "2.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
 
 [[package]]
 name = "syn"
@@ -253,6 +307,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasm-bindgen-futures"
+version = "0.4.33"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23639446165ca5a5de86ae1d8896b737ae80319560fbaa4c2887b7da6e7ebd7d"
+dependencies = [
+ "cfg-if",
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "wasm-bindgen-macro"
 version = "0.2.83"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -282,14 +348,60 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c38c045535d93ec4f0b4defec448e4291638ee608530863b1e2ba115d4fff7f"
 
 [[package]]
+name = "wasm-bindgen-test"
+version = "0.3.33"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09d2fff962180c3fadf677438054b1db62bee4aa32af26a45388af07d1287e1d"
+dependencies = [
+ "console_error_panic_hook",
+ "js-sys",
+ "scoped-tls",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "wasm-bindgen-test-macro",
+]
+
+[[package]]
+name = "wasm-bindgen-test-macro"
+version = "0.3.33"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4683da3dfc016f704c9f82cf401520c4f1cb3ee440f7f52b3d6ac29506a49ca7"
+dependencies = [
+ "proc-macro2",
+ "quote",
+]
+
+[[package]]
+name = "web-sys"
+version = "0.3.60"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bcda906d8be16e728fd5adc5b729afad4e444e106ab28cd1c7256e54fa61510f"
+dependencies = [
+ "js-sys",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "winter-crypto"
 version = "0.4.0"
 dependencies = [
  "blake3",
  "serde",
  "sha3",
- "winter-math",
- "winter-utils",
+ "winter-math 0.4.0",
+ "winter-utils 0.4.0",
+]
+
+[[package]]
+name = "winter-crypto"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9b8e5f1652641d2febd5eafb0d0bbc5b70825daac82f1be1c1a2eca3656f7679"
+dependencies = [
+ "blake3",
+ "sha3",
+ "winter-math 0.6.2",
+ "winter-utils 0.6.2",
 ]
 
 [[package]]
@@ -298,9 +410,24 @@ version = "0.4.0"
 dependencies = [
  "serde",
  "serde_json",
- "winter-utils",
+ "winter-utils 0.4.0",
+]
+
+[[package]]
+name = "winter-math"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "820dcf1695fb6f63abd67d5ecc529ac97db44dba539611be707a85e13739abac"
+dependencies = [
+ "winter-utils 0.6.2",
 ]
 
 [[package]]
 name = "winter-utils"
 version = "0.4.0"
+
+[[package]]
+name = "winter-utils"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08bee31f43e1dfbba3428f77fa110096af386b77cfb790ccee1b084fc093fd7c"

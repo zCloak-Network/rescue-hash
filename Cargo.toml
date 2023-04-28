@@ -12,7 +12,7 @@ math = {verision = "0.4", path = "src/utils/winterfell-math", package = "winter-
 crypto = {verision = "0.4", path = "src/utils/winterfell-crypto", package = "winter-crypto", default-features = false}
 wasm-bindgen = "0.2"
 utils-core = {version = "0.4", path = "src/utils/winterfell-utils/utils/core", package = "winter-utils", default-features = false}
-
+rescue-prime-optimized = {git = "https://github.com/jonathanxuu/RescuePrimeOptimiezd.git", beanch = "main",efault-features = false}
 
 [features]
 default = ["std"]
