@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-sp-std = { git = "https://github.com/zCloak-Network/substrate", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate.git", default-features = false }
 math = {verision = "0.4", path = "src/utils/winterfell-math", package = "winter-math", default-features = false}
 crypto = {verision = "0.4", path = "src/utils/winterfell-crypto", package = "winter-crypto", default-features = false}
 wasm-bindgen = "0.2"

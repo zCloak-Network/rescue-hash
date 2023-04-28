@@ -161,7 +161,7 @@ name = "rescue"
 version = "0.1.0"
 dependencies = [
  "rescue-prime-optimized",
- "sp-std 4.0.0-dev",
+ "sp-std",
  "wasm-bindgen",
  "winter-crypto 0.4.0",
  "winter-math 0.4.0",
@@ -175,7 +175,7 @@ source = "git+https://github.com/jonathanxuu/RescuePrimeOptimiezd.git#93e320fa1a
 dependencies = [
  "blake3",
  "console_error_panic_hook",
- "sp-std 5.0.0",
+ "sp-std",
  "wasm-bindgen",
  "wasm-bindgen-test",
  "winter-crypto 0.6.2",
@@ -235,11 +235,6 @@ dependencies = [
  "digest",
  "keccak",
 ]
-
-[[package]]
-name = "sp-std"
-version = "4.0.0-dev"
-source = "git+https://github.com/zCloak-Network/substrate#6699fccb942eb61734dfdbc9b970dd8784d455ab"
 
 [[package]]
 name = "sp-std"
